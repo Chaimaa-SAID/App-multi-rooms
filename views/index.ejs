@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
+    <title>Chat</title>
+</head>
+<body style="background-color: #f4f7f6;margin-top:20px;">
+    <div class="main">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card chat-app">
+                        <div id="plist" class="rooms-list">
+                            <div class="input-group"> 
+                                <button type="button" id="createNewRoom" class="btn btn-primary btn-block" onclick="_createRoom()">Ajouter nouveau chatroom</button>
+                            </div>
+                            <ul id="chatroomsList" class="list-unstyled chat-list mt-2 mb-0">
+                                <% rooms.forEach(room => { %>
+                                    <li class="clearfix" onclick="_joinRoom('<%=room.name%>')" id="<%=room.name%>">
+                                        <div id="<%=room.name%>" class="about <%=room.name%>">
+                                            <div class="name"><%= room.name %></div>                                           
+                                        </div>
+                                    </li>
+                                
+                                <% }); %>
+                            </ul>
+                        </div>
+                        <div class="chat">
+                            <div class="chat-header clearfix">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="chat-about">
+                                            <h6 class="m-b-0"><%= username %></h6>
+                                            <div id="isWritting"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat-history">
+                                    <ul class="m-b-0" id="msgContainer">
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chat-message clearfix">
+                                <form action="/chat" method="POST" id="chatForm">
+                                    <input 
+                                        type="text" 
+                                        id="msgInput" 
+                                        class="form-control" 
+                                        placeholder="Tapez un message" 
+                                        onkeypress="writting()" 
+                                        onblur="notWritting()" 
+                                        autofocus
+                                    >
+                                    <select class="custom-select users-list" name="receiver" id="receiverInput">
+                                        <option value="all">A tous</option>
+                                        <% users.forEach(user => { %>
+                                            <option value="<%= user.username %>"><%= user.username %></option>
+                                        <% }); %>
+                                    </select>
+                                    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-send"></i></button>                                               
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="app">
+        <h1 class="chatTitle">Bienvenue sur chat</h1>
+
+
+        <div class="container">
+            <div class="channelList">
+                <h1>Liste des chatrooms</h1>
+                <ul id="roomList">
+                    <% rooms.forEach(room => { %>
+                    <li onclick="_joinRoom('<%=room.name%>')" class="elementList" id="<%=room.name%>"><%= room.name %></li>
+                    <% }); %>
+                    <li onclick="_createRoom()" class="elementList" id="createNewRoom">Ajouter un chatroom</li>
+                </ul>
+            </div>
+    
+            <div class="msgContainer" id="msgContainer"></div>
+        </div>
+        
+        <div id="isWritting"></div>
+        <form action="/chat" method="POST" id="chatForm">
+            <input type="text" id="msgInput" onkeypress="writting()" onblur="notWritting()" autofocus>
+            <select name="receiver" id="receiverInput">
+                <option value="all">A tous</option>
+                <% users.forEach(user => { %>
+                    <option value="<%= user.username %>"><%= user.username %></option>
+                <% }); %>
+            </select>
+            <input type="submit" id="btnSend" value="Envoyer">
+        </form>
+
+    </div> -->
+    <script>
+        var username = '<%= username %>'; // test is now a valid js object
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>

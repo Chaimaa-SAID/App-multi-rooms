@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.7.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.7.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="chat.css">
+    <title>Chat App - Inscription</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <div class="fadeIn first form_title">
+            Chat Application
+          </div>
+      
+          <form action="/register" method="POST" id="formBody">
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Nom de l'utilisateur">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe">
+            <input type="submit" class="fadeIn fourth clickable" value="S'inscrire">
+          </form>
+      
+
+          <div id="formFooter">
+            <a class="underlineHover" href="/connexion">Connexion</a>
+          </div>
+      
+        </div>
+    </div>
+</body>
+</html>
